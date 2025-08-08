@@ -4,10 +4,42 @@ Temegram Bot Template.
 
 ## Description
 
-### Startup point
+Simple Temegram Bot Template with aiogram.
 
-./app.py is the startup point.
+### Structure
 
+| aiogram-bot-template              # root folder
+.env.example                        # config example
+.gitignore                          # gitignore
+app.py                              # startup point
+config.py                           # config from .env
+docker_compose.yaml                 # containers runner
+poetry.lock                         # poetry lock
+pyproject.toml                      # poetry config
+README.md                           # readme
+    | bot                           # bot root folder
+        | database                  # database folder
+            | models                # databse models and requests
+                __init__.py         # init for import
+                db_base.py          # BASE init
+                db_requests.py      # requests to DB
+                db_table_users.py   # table USERS model
+            init_db.py              # engine, session, tables creation
+        | handlers                  # handlers
+            user.py                 # handlers for users
+        | locales                   # localization
+            | en/LC_MESSAGES        # en locale
+                txt.ftl             # en texts
+            | ru/LC_MESSAGES        # ru locale
+                txt.ftl             # ru texts
+        | middlewares               # middlewares
+            db_session.py           # pass db session to handlers
+            i18n.py                 # pass localisation to handlers
+        | utils                     # utils
+            i18n.py                 # translator hub creation
+    bot.py                          # bot start point
+    Dockerfile                      # Dockerfile for bot
+    
 ### Database
 
 I use postgres in docker with full dsn string in .env file for connection.
@@ -41,6 +73,7 @@ dp.update.middleware(TranslatorRunnerMiddleware())
 
 ### Dependencies
 
+- Poetry
 - Python 3.10
 - Docker Engine
 - Check pyproject.toml for dependencies
@@ -88,37 +121,16 @@ docker-compose --profile=full up -d
 ```
 
 
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
-
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+Iron Rom
+r.yarkey@gmail.com
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+This project is licensed under the MIT License
