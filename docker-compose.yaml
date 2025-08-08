@@ -1,0 +1,20 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    command: ["poetry", "run", "python", "app.py"]
+    profiles:
+      - full
+
+  postgres:
+    image: 'postgres:17.2'
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: superuser
+      POSTGRES_PASSWORD: superpassword
+      POSTGRES_DB: bot
+    profiles:
+      - full
+      - infrastructure
